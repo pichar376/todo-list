@@ -7,8 +7,6 @@ const TodoApp = () => {
 
   const [todos, setTodos] = useState([]);
 
-  const [isEdit, SetIsEdit] = useState(false);
-
   const handleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -29,8 +27,10 @@ const TodoApp = () => {
     setTodos(newItems);
   };
 
-  const handleEdit = (id) => {
-    SetIsEdit(true);
+  const handleUpdate = (id, value) => {
+    const itemToEdit = todos.find((el) => el.id === id);
+
+    itemToEdit.title = value;
   };
 
   return (
@@ -64,8 +64,9 @@ const TodoApp = () => {
             key={el.id}
             el={el}
             onDelete={handleDelete}
-            onUpdate={handleEdit}
-            isEdit={isEdit}
+            onUpdate={handleUpdate}
+            todos={todos}
+            setTodos={setTodos}
           />
         ))}
       </h1>
