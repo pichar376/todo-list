@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import TodoFormEdit from "../TodoFormEdit/TodoFormEdit";
+import TodoInfo from "../TodoInfo/TodoInfo";
 const TodoItem = ({ el, onDelete, todos, setTodos, onUpdate }) => {
   const [isEdit, setIsEdit] = useState(false);
   return (
@@ -21,24 +22,7 @@ const TodoItem = ({ el, onDelete, todos, setTodos, onUpdate }) => {
           setIsEdit={setIsEdit}
         />
       ) : (
-        <div>
-          <h3>{el.title}</h3>
-          <div
-            style={{
-              display: "flex",
-              gap: ".2rem",
-            }}
-          >
-            <Button onClick={() => setIsEdit(true)}>Edit</Button>
-            <Button
-              onClick={() => {
-                onDelete(el.id);
-              }}
-            >
-              Delete
-            </Button>
-          </div>
-        </div>
+        <TodoInfo el={el} setIsEdit={setIsEdit} onDelete={onDelete} />
       )}
     </div>
   );

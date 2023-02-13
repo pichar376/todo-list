@@ -1,11 +1,8 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 const TodoFormEdit = ({ el, todos, setTodos, onUpdate, setIsEdit }) => {
   const [newValue, setNewValue] = useState(el.title);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
 
   const handleClickUpdate = () => {
     onUpdate(el.id, newValue);
@@ -15,10 +12,15 @@ const TodoFormEdit = ({ el, todos, setTodos, onUpdate, setIsEdit }) => {
     setNewValue(e.target.value);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={newValue} onChange={handleChange} />
+    <Form className="d-flex gap-1" style={{ width: "100%" }}>
+      <Form.Control
+        type="text"
+        value={newValue}
+        onChange={handleChange}
+        style={{ fontSize: "1.3rem", padding: "3px", fontWeight: "300" }}
+      />
       <Button onClick={handleClickUpdate}>update</Button>
-    </form>
+    </Form>
   );
 };
 

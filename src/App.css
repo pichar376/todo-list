@@ -1,0 +1,9 @@
+body {
+  background-color: #eee !important;
+}
+
+@media (min-width: 420px) {
+  .query-item {
+    width: calc(100% - 5rem) !important;
+  }
+}

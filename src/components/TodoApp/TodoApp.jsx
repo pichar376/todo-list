@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Stack } from "react-bootstrap";
+import { Button, Form, FormControl, ListGroup, Stack } from "react-bootstrap";
 import TodoItem from "./components/TodoItem/TodoItem";
 
 const TodoApp = () => {
@@ -34,43 +34,40 @@ const TodoApp = () => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <h1>todoApp</h1>
-      <Stack gap="3rem">
-        <form
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "1rem",
-          }}
-          onSubmit={handleSubmit}
-        >
-          <input type="text" value={title} onChange={handleChange} />
-          <Button type="submit">Added</Button>
-        </form>
-      </Stack>
-      <h1>
+    <Stack>
+      <h1 style={{ textAlign: "center" }}>todoApp</h1>
+      <Form
+        onSubmit={handleSubmit}
+        className="d-flex justify-content-center mt-4 gap-2"
+      >
+        <FormControl
+          style={{ maxWidth: "15rem" }}
+          type="text"
+          value={title}
+          onChange={handleChange}
+        />
+        <Button type="submit">Added</Button>
+      </Form>
+
+      <ListGroup className="mt-2" as="ol" numbered>
         {todos.map((el) => (
-          <TodoItem
-            key={el.id}
-            el={el}
-            onDelete={handleDelete}
-            onUpdate={handleUpdate}
-            todos={todos}
-            setTodos={setTodos}
-          />
+          <ListGroup.Item
+            as="li"
+            style={{ margin: "0 auto", maxWidth: "980px", minWidth: "420px" }}
+            className="query-item"
+          >
+            <TodoItem
+              key={el.id}
+              el={el}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+              todos={todos}
+              setTodos={setTodos}
+            />
+          </ListGroup.Item>
         ))}
-      </h1>
-    </div>
+      </ListGroup>
+    </Stack>
   );
 };
 
