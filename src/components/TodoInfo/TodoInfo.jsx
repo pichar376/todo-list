@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const TodoInfo = ({ el, setIsEdit, onDelete }) => {
+const TodoInfo = ({ el, setIsEdit, handleShow }) => {
+  const navigate = useNavigate();
+  const handleToDelete = (path) => {
+    navigate(`${path}`);
+    handleShow();
+  };
   return (
     <Stack
       direction="horizontal"
@@ -15,7 +22,7 @@ const TodoInfo = ({ el, setIsEdit, onDelete }) => {
         <Button onClick={() => setIsEdit(true)}>Edit</Button>
         <Button
           onClick={() => {
-            onDelete(el.id);
+            handleToDelete(el.id);
           }}
         >
           Delete

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Form, FormControl, ListGroup, Stack } from "react-bootstrap";
+import ModalDelete from "./components/ModalDelete/ModalDelete";
 import TodoItem from "./components/TodoItem/TodoItem";
 
 const TodoApp = () => {
@@ -33,6 +34,10 @@ const TodoApp = () => {
     itemToEdit.title = value;
   };
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <Stack>
       <h1 style={{ textAlign: "center" }}>todoApp</h1>
@@ -52,13 +57,17 @@ const TodoApp = () => {
       <ListGroup className="mt-2" as="ol" numbered>
         {todos.map((el) => (
           <ListGroup.Item
+            key={el.id}
             as="li"
             style={{ margin: "0 auto", maxWidth: "980px", minWidth: "420px" }}
             className="query-item"
           >
             <TodoItem
+              handleShow={handleShow}
+              show={show}
               key={el.id}
               el={el}
+              handleclose={handleClose}
               onDelete={handleDelete}
               onUpdate={handleUpdate}
               todos={todos}
@@ -67,6 +76,12 @@ const TodoApp = () => {
           </ListGroup.Item>
         ))}
       </ListGroup>
+
+      <ModalDelete
+        show={show}
+        handleClose={handleClose}
+        onDelete={handleDelete}
+      />
     </Stack>
   );
 };
