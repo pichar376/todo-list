@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -10,15 +9,16 @@ const TodoInfo = ({ el, setIsEdit, handleShow }) => {
   };
   return (
     <Stack
-      direction="horizontal"
       gap={3}
-      className="d-flex"
-      style={{ alignItems: "flex-end", width: "100%" }}
+      className="container d-flex flex-row"
+      style={{ position: "relative" }}
     >
-      <h3 style={{ marginBottom: "0", flexGrow: "1", fontWeight: "300" }}>
-        {el.title}
-      </h3>
-      <Stack className="d-flex " direction="horizontal" gap={1}>
+      <h3 className="flex-grow-1">{el.title}</h3>
+      <Stack
+        className="d-flex flex-row"
+        gap={1}
+        style={{ position: "absolute", fontWeight: "300", right: "1rem" }}
+      >
         <Button onClick={() => setIsEdit(true)}>Edit</Button>
         <Button
           onClick={() => {

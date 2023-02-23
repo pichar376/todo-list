@@ -11,10 +11,10 @@ const ModalDelete = ({ show, handleClose, onDelete }) => {
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure to delete the tas?</Modal.Body>
+        <Modal.Body>Are you sure to delete the task?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cancel
           </Button>
           <Button
             variant="primary"
@@ -24,7 +24,7 @@ const ModalDelete = ({ show, handleClose, onDelete }) => {
               handleClose();
             }}
           >
-            Save Changes
+            Yes Delete
           </Button>
         </Modal.Footer>
       </Modal>

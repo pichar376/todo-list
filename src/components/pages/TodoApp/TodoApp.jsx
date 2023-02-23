@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form, FormControl, ListGroup, Stack } from "react-bootstrap";
-import ModalDelete from "./components/ModalDelete/ModalDelete";
-import TodoItem from "./components/TodoItem/TodoItem";
+import ModalDelete from "../../ModalDelete/ModalDelete";
+import TodoItem from "../../TodoItem/TodoItem";
 
 const TodoApp = () => {
   const [title, setTitle] = useState("");
@@ -54,13 +54,13 @@ const TodoApp = () => {
         <Button type="submit">Added</Button>
       </Form>
 
-      <ListGroup className="mt-2" as="ol" numbered>
+      <ListGroup className="mt-4" as="ol" numbered>
         {todos.map((el) => (
           <ListGroup.Item
             key={el.id}
             as="li"
-            style={{ margin: "0 auto", maxWidth: "980px", minWidth: "420px" }}
-            className="query-item"
+            className="container d-flex "
+            style={{ minWidth: "250px", height: "4rem" }}
           >
             <TodoItem
               handleShow={handleShow}

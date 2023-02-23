@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
 import TodoFormEdit from "../TodoFormEdit/TodoFormEdit";
 import TodoInfo from "../TodoInfo/TodoInfo";
+
 const TodoItem = ({
   el,
   onDelete,
@@ -13,14 +13,7 @@ const TodoItem = ({
 }) => {
   const [isEdit, setIsEdit] = useState(false);
   return (
-    <div
-      style={{
-        marginTop: "2rem",
-        display: "flex",
-        gap: "1rem",
-        alignItems: "center",
-      }}
-    >
+    <div className="container-fluid">
       {isEdit ? (
         <TodoFormEdit
           el={el}

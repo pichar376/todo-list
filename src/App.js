@@ -1,8 +1,5 @@
-import TodoApp from "./components/TodoApp/TodoApp";
-import "./App.css"
 import { BrowserRouter } from "react-router-dom";
-
-
+import TodoApp from "./components/pages/TodoApp/TodoApp";
 
 function App() {
   return (
