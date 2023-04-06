@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Button, Form, FormControl, ListGroup, Stack } from "react-bootstrap";
 import ModalDelete from "../../ModalDelete/ModalDelete";
 import TodoItem from "../../TodoItem/TodoItem";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+
+const STORAGE_KEY = "@@todoApp/todoAppLocalStorage";
 
 const TodoApp = () => {
   const [title, setTitle] = useState("");
 
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos, saveTodos] = useLocalStorage(STORAGE_KEY, []);
 
   const handleChange = (e) => {
     setTitle(e.target.value);
@@ -19,19 +22,20 @@ const TodoApp = () => {
       title,
       completed: false,
     };
-    setTodos([...todos, newTodo]);
+    saveTodos([...todos, newTodo]);
     setTitle("");
   };
 
   const handleDelete = (id) => {
     const newItems = todos.filter((el) => el.id !== id);
-    setTodos(newItems);
+    saveTodos(newItems);
   };
 
   const handleUpdate = (id, value) => {
-    const itemToEdit = todos.find((el) => el.id === id);
-
-    itemToEdit.title = value;
+    const currentIndex = todos.findIndex((el) => el.id === id);
+    const newTodos = todos;
+    newTodos[currentIndex].title = value;
+    saveTodos(newTodos);
   };
 
   const [show, setShow] = useState(false);
@@ -41,6 +45,7 @@ const TodoApp = () => {
   return (
     <Stack>
       <h1 style={{ textAlign: "center" }}>todoApp</h1>
+
       <Form
         onSubmit={handleSubmit}
         className="d-flex justify-content-center mt-4 gap-2"
