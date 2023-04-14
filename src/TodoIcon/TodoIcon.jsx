@@ -1,6 +1,6 @@
 import { AiOutlineCheck } from "react-icons/ai";
 
-const TodoIcon = ({ color = "gray", ...props }) => {
+const TodoIcon = ({ color = "gray", completed, ...props }) => {
   return (
     <div>
       <AiOutlineCheck
@@ -12,6 +12,7 @@ const TodoIcon = ({ color = "gray", ...props }) => {
           left: "4px",
           top: "15px",
           color: `${color}`,
+          opacity: completed ? "1" : "0",
         }}
       />
     </div>

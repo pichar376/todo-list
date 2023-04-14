@@ -4,10 +4,11 @@ import { Button, Form } from "react-bootstrap";
 const TodoFormEdit = ({ el, todos, setTodos, onUpdate, setIsEdit }) => {
   const [newValue, setNewValue] = useState(el.title);
 
-  const handleClickUpdate = () => {
+  const handleUpdate = () => {
     onUpdate(el.id, newValue);
     setIsEdit(false);
   };
+
   const handleChange = (e) => {
     setNewValue(e.target.value);
   };
@@ -19,7 +20,7 @@ const TodoFormEdit = ({ el, todos, setTodos, onUpdate, setIsEdit }) => {
         onChange={handleChange}
         style={{ fontSize: "1.3rem", padding: "3px", fontWeight: "300" }}
       />
-      <Button onClick={handleClickUpdate}>update</Button>
+      <Button onClick={handleUpdate}>update</Button>
     </Form>
   );
 };

@@ -28,7 +28,7 @@ const TodoItem = ({
         />
       ) : (
         <>
-          <TodoIcon color={completed ? "green" : "gray"} onClick={() => {}} />
+          <TodoIcon color="green" completed={completed} />
           <TodoInfo
             el={el}
             onComplete={onComplete}

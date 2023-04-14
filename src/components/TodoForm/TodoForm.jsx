@@ -23,10 +23,18 @@ const TodoForm = ({
   setTodos,
   show,
   filteredItems,
+  setTitle,
 }) => {
   const [showModalTodo, setShowModalTodo] = useState(false);
-  const handleCloseTodoModal = () => setShowModalTodo(false);
+  const handleCloseTodoModal = () => {
+    setShowModalTodo(false);
+  };
   const handleShowTodoModal = () => setShowModalTodo(true);
+
+  //function to clear the created form of the new task if it has not been added to the list
+  const clear = () => {
+    setTitle("");
+  };
 
   return (
     <>
@@ -34,6 +42,8 @@ const TodoForm = ({
         onClose={handleCloseTodoModal}
         show={showModalTodo}
         handleShow={handleShowTodoModal}
+        setTitle={setTitle}
+        clear={clear}
       >
         <Form
           onSubmit={handleSubmit}

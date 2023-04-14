@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const ModalTodo = ({ children, onClose, handleShow, show }) => {
+const ModalTodo = ({ children, onClose, handleShow, show, clear }) => {
   return (
     <>
       <div className="container--add--task">
@@ -12,7 +12,7 @@ const ModalTodo = ({ children, onClose, handleShow, show }) => {
       </div>
 
       <Modal show={show} onHide={onClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton onClick={clear}>
           <Modal.Title>Create Task</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>

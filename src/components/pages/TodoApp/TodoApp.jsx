@@ -36,7 +36,6 @@ const TodoApp = () => {
     };
     saveTodos([...todos, newTodo]);
     setTitle("");
-    console.log(todos);
   };
 
   const handleDelete = (id) => {
@@ -81,6 +80,7 @@ const TodoApp = () => {
         onShow={handleShow}
         onClose={handleClose}
         filteredItems={filteredItems}
+        setTitle={setTitle}
       />
 
       <ModalDelete
