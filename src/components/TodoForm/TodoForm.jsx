@@ -12,7 +12,7 @@ import "./todoForm.styles.css";
 
 const TodoForm = ({
   todos,
-  handleCompleted,
+  onComplete,
   handleSubmit,
   handleChange,
   title,
@@ -76,7 +76,7 @@ const TodoForm = ({
               handleclose={onClose}
               onDelete={handleDelete}
               onUpdate={handleUpdate}
-              onCompleted={handleCompleted}
+              onComplete={onComplete}
               todos={todos}
               setTodos={setTodos}
               completed={el.completed}

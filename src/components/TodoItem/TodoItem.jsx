@@ -1,6 +1,8 @@
 import { useState } from "react";
 import TodoFormEdit from "../TodoFormEdit/TodoFormEdit";
 import TodoInfo from "../TodoInfo/TodoInfo";
+import TodoIcon from "../../TodoIcon/TodoIcon";
+import { Button } from "react-bootstrap";
 
 const TodoItem = ({
   el,
@@ -10,10 +12,12 @@ const TodoItem = ({
   onUpdate,
   show,
   handleShow,
+  onComplete,
+  completed,
 }) => {
   const [isEdit, setIsEdit] = useState(false);
   return (
-    <div className="container-fluid">
+    <>
       {isEdit ? (
         <TodoFormEdit
           el={el}
@@ -23,15 +27,20 @@ const TodoItem = ({
           setIsEdit={setIsEdit}
         />
       ) : (
-        <TodoInfo
-          el={el}
-          setIsEdit={setIsEdit}
-          onDelete={onDelete}
-          show={show}
-          handleShow={handleShow}
-        />
+        <>
+          <TodoIcon color={completed ? "green" : "gray"} onClick={() => {}} />
+          <TodoInfo
+            el={el}
+            onComplete={onComplete}
+            completed={completed}
+            setIsEdit={setIsEdit}
+            onDelete={onDelete}
+            show={show}
+            handleShow={handleShow}
+          />
+        </>
       )}
-    </div>
+    </>
   );
 };
 

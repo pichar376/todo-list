@@ -3,6 +3,9 @@ import { Button, Form, FormControl, ListGroup, Stack } from "react-bootstrap";
 import ModalDelete from "../../ModalDelete/ModalDelete";
 import TodoItem from "../../TodoItem/TodoItem";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import ModalTodo from "../../ModalTodo/ModalTodo";
+import TodoForm from "../../TodoForm/TodoForm";
+import SearchTodo from "../../SearchTodo/SearchTodo";
 
 const STORAGE_KEY = "@@todoApp/todoAppLocalStorage";
 
@@ -10,6 +13,15 @@ const TodoApp = () => {
   const [title, setTitle] = useState("");
 
   const [todos, setTodos, saveTodos] = useLocalStorage(STORAGE_KEY, []);
+  const [search, setSearch] = useState("");
+
+  const filteredItems = todos.filter((el) =>
+    el.title.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
 
   const handleChange = (e) => {
     setTitle(e.target.value);
@@ -24,6 +36,7 @@ const TodoApp = () => {
     };
     saveTodos([...todos, newTodo]);
     setTitle("");
+    console.log(todos);
   };
 
   const handleDelete = (id) => {
@@ -38,6 +51,14 @@ const TodoApp = () => {
     saveTodos(newTodos);
   };
 
+  const handleComplete = (id) => {
+    const currentIndex = todos.findIndex((el) => el.id === id);
+    const newTodos = [...todos];
+    newTodos[currentIndex].completed = !newTodos[currentIndex].completed;
+
+    saveTodos(newTodos);
+  };
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -45,42 +66,22 @@ const TodoApp = () => {
   return (
     <Stack>
       <h1 style={{ textAlign: "center" }}>todoApp</h1>
+      <SearchTodo onSearch={handleSearch} search={search} />
 
-      <Form
-        onSubmit={handleSubmit}
-        className="d-flex justify-content-center mt-4 gap-2"
-      >
-        <FormControl
-          style={{ maxWidth: "15rem" }}
-          type="text"
-          value={title}
-          onChange={handleChange}
-        />
-        <Button type="submit">Added</Button>
-      </Form>
-
-      <ListGroup className="mt-4" as="ol" numbered>
-        {todos.map((el) => (
-          <ListGroup.Item
-            key={el.id}
-            as="li"
-            className="container d-flex "
-            style={{ minWidth: "250px", height: "4rem" }}
-          >
-            <TodoItem
-              handleShow={handleShow}
-              show={show}
-              key={el.id}
-              el={el}
-              handleclose={handleClose}
-              onDelete={handleDelete}
-              onUpdate={handleUpdate}
-              todos={todos}
-              setTodos={setTodos}
-            />
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+      <TodoForm
+        todos={todos}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        title={title}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+        setTodos={setTodos}
+        show={show}
+        onComplete={handleComplete}
+        onShow={handleShow}
+        onClose={handleClose}
+        filteredItems={filteredItems}
+      />
 
       <ModalDelete
         show={show}
