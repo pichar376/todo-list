@@ -1,17 +1,21 @@
-import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { TodoContext } from "../../TodoContext/TodoContext";
+import { useContext } from "react";
 
-const ModalTodo = ({ children, onClose, handleShow, show, clear }) => {
+const ModalTodo = ({ children }) => {
+  const { clear, handleCloseTodoModal, handleShowTodoModal, showModalTodo } =
+    useContext(TodoContext);
+
   return (
     <>
       <div className="container--add--task">
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShowTodoModal}>
           Add New Task
         </Button>
       </div>
 
-      <Modal show={show} onHide={onClose}>
+      <Modal show={showModalTodo} onHide={handleCloseTodoModal}>
         <Modal.Header closeButton onClick={clear}>
           <Modal.Title>Create Task</Modal.Title>
         </Modal.Header>

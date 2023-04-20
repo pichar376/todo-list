@@ -1,20 +1,11 @@
-import { useState } from "react";
 import TodoFormEdit from "../TodoFormEdit/TodoFormEdit";
 import TodoInfo from "../TodoInfo/TodoInfo";
 import TodoIcon from "../../TodoIcon/TodoIcon";
-import { Button } from "react-bootstrap";
+import { TodoContext } from "../../TodoContext/TodoContext";
+import { useContext, useState } from "react";
 
-const TodoItem = ({
-  el,
-  onDelete,
-  todos,
-  setTodos,
-  onUpdate,
-  show,
-  handleShow,
-  onComplete,
-  completed,
-}) => {
+const TodoItem = ({ el, completed }) => {
+  const { todos, setTodos, show } = useContext(TodoContext);
   const [isEdit, setIsEdit] = useState(false);
   return (
     <>
@@ -23,7 +14,6 @@ const TodoItem = ({
           el={el}
           todos={todos}
           setTodos={setTodos}
-          onUpdate={onUpdate}
           setIsEdit={setIsEdit}
         />
       ) : (
@@ -31,12 +21,9 @@ const TodoItem = ({
           <TodoIcon color="green" completed={completed} />
           <TodoInfo
             el={el}
-            onComplete={onComplete}
             completed={completed}
             setIsEdit={setIsEdit}
-            onDelete={onDelete}
             show={show}
-            handleShow={handleShow}
           />
         </>
       )}

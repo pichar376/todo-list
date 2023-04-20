@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext } from "react";
 import {
   Button,
   Form,
@@ -9,42 +9,19 @@ import {
 import TodoItem from "../TodoItem/TodoItem";
 import ModalTodo from "../ModalTodo/ModalTodo";
 import "./todoForm.styles.css";
+import { TodoContext } from "../../TodoContext/TodoContext";
 
-const TodoForm = ({
-  todos,
-  onComplete,
-  handleSubmit,
-  handleChange,
-  title,
-  handleDelete,
-  handleUpdate,
-  onShow,
-  onClose,
-  setTodos,
-  show,
-  filteredItems,
-  setTitle,
-}) => {
-  const [showModalTodo, setShowModalTodo] = useState(false);
-  const handleCloseTodoModal = () => {
-    setShowModalTodo(false);
-  };
-  const handleShowTodoModal = () => setShowModalTodo(true);
-
-  //function to clear the created form of the new task if it has not been added to the list
-  const clear = () => {
-    setTitle("");
-  };
-
+const TodoForm = () => {
+  const {
+    handleSubmit,
+    handleChange,
+    title,
+    filteredItems,
+    handleCloseTodoModal,
+  } = useContext(TodoContext);
   return (
     <>
-      <ModalTodo
-        onClose={handleCloseTodoModal}
-        show={showModalTodo}
-        handleShow={handleShowTodoModal}
-        setTitle={setTitle}
-        clear={clear}
-      >
+      <ModalTodo>
         <Form
           onSubmit={handleSubmit}
           className="d-flex justify-content-center mt-4 gap-2 "
@@ -78,19 +55,7 @@ const TodoForm = ({
               height: "4rem",
             }}
           >
-            <TodoItem
-              handleShow={onShow}
-              show={show}
-              key={el.id}
-              el={el}
-              handleclose={onClose}
-              onDelete={handleDelete}
-              onUpdate={handleUpdate}
-              onComplete={onComplete}
-              todos={todos}
-              setTodos={setTodos}
-              completed={el.completed}
-            />
+            <TodoItem key={el.id} el={el} completed={el.completed} />
           </ListGroupItem>
         ))}
       </ListGroup>

@@ -1,10 +1,12 @@
-import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
+import { TodoContext } from "../../TodoContext/TodoContext";
+import { useContext } from "react";
 
-const ModalDelete = ({ show, handleClose, onDelete }) => {
+const ModalDelete = () => {
   const location = useLocation();
   const idToDelete = location.pathname;
+  const { show, handleClose, handleDelete } = useContext(TodoContext);
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -19,7 +21,7 @@ const ModalDelete = ({ show, handleClose, onDelete }) => {
           <Button
             variant="primary"
             onClick={() => {
-              onDelete(parseInt(idToDelete.slice(1)));
+              handleDelete(parseInt(idToDelete.slice(1)));
               console.log(idToDelete.slice(1));
               handleClose();
             }}

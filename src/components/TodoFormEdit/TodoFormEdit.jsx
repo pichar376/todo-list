@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { TodoContext } from "../../TodoContext/TodoContext";
 
-const TodoFormEdit = ({ el, todos, setTodos, onUpdate, setIsEdit }) => {
+const TodoFormEdit = ({ el, setIsEdit }) => {
+  //this is value of the search input
   const [newValue, setNewValue] = useState(el.title);
 
-  const handleUpdate = () => {
-    onUpdate(el.id, newValue);
+  const { handleUpdate } = useContext(TodoContext);
+
+  const handleUpdateForm = (e) => {
+    e.preventDefault();
+    handleUpdate(el.id, newValue);
     setIsEdit(false);
   };
 
@@ -19,8 +24,11 @@ const TodoFormEdit = ({ el, todos, setTodos, onUpdate, setIsEdit }) => {
         value={newValue}
         onChange={handleChange}
         style={{ fontSize: "1.3rem", padding: "3px", fontWeight: "300" }}
+        autoFocus
       />
-      <Button onClick={handleUpdate}>update</Button>
+      <Button type="submit" onClick={handleUpdateForm}>
+        update
+      </Button>
     </Form>
   );
 };

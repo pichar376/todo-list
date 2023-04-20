@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { TodoContext } from "../../TodoContext/TodoContext";
 
-const TodoInfo = ({ el, setIsEdit, handleShow, completed, onComplete }) => {
+const TodoInfo = ({ el, completed, setIsEdit }) => {
+  const { handleComplete, handleShow } = useContext(TodoContext);
   const navigate = useNavigate();
   const handleToDelete = (path) => {
     navigate(`${path}`);
@@ -17,7 +20,7 @@ const TodoInfo = ({ el, setIsEdit, handleShow, completed, onComplete }) => {
         className="flex-grow-1"
         style={{ textDecorationLine: completed ? "line-through" : "none" }}
         onClick={() => {
-          onComplete(el.id);
+          handleComplete(el.id);
         }}
       >
         {el.title}
