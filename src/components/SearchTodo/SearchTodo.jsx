@@ -1,22 +1,26 @@
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import "./searchTodo.styles.css";
+import { CiSearch } from "react-icons/ci";
 
 const SearchTodo = ({ onSearch, search }) => {
   return (
-    <>
-      <div className="container-search">
-        <InputGroup className="mb-3 mt-5">
-          <Form.Control
-            placeholder="Search Todo"
-            value={search}
-            onChange={onSearch}
-            aria-label="Example text with button addon"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-      </div>
-    </>
+    <InputGroup
+      className="mb-3 mt-5"
+      style={{ width: "60%", margin: "0 auto" }}
+    >
+      <InputGroup.Text
+        style={{ backgroundColor: "transparent" }}
+        onChange={onSearch}
+      >
+        <CiSearch />
+      </InputGroup.Text>
+
+      <Form.Control
+        placeholder="Search Todo"
+        value={search}
+        onChange={onSearch}
+      />
+    </InputGroup>
   );
 };
 
