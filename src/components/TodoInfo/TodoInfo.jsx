@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { Button, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { TodoContext } from "../../TodoContext/TodoContext";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { AiOutlineEdit } from "react-icons/ai";
 
 const TodoInfo = ({ el, completed, setIsEdit }) => {
   const { handleComplete, handleShow } = useContext(TodoContext);
@@ -11,35 +13,43 @@ const TodoInfo = ({ el, completed, setIsEdit }) => {
     handleShow();
   };
   return (
-    <Stack
-      gap={3}
-      className="container d-flex flex-row"
-      style={{ position: "relative" }}
-    >
-      <h3
-        className="flex-grow-1"
-        style={{ textDecorationLine: completed ? "line-through" : "none" }}
-        onClick={() => {
-          handleComplete(el.id);
+    <>
+      <Stack
+        gap={3}
+        direction="horizontal"
+        style={{ overflow: "hidden", width: "85%", height: "4rem" }}
+      >
+        <h3
+          className="flex-grow-0"
+          style={{
+            textDecorationLine: completed ? "line-through" : "none",
+          }}
+          onClick={() => {
+            handleComplete(el.id);
+          }}
+        >
+          {el.title}
+        </h3>
+      </Stack>
+      <Stack
+        className="d-flex flex-row align-items-center"
+        gap={3}
+        style={{
+          position: "absolute",
+          right: "1rem",
+          height: "100%",
         }}
       >
-        {el.title}
-      </h3>
-      <Stack
-        className="d-flex flex-row"
-        gap={1}
-        style={{ position: "absolute", fontWeight: "300", right: "1rem" }}
-      >
-        <Button onClick={() => setIsEdit(true)}>Edit</Button>
-        <Button
+        <AiOutlineEdit size="1.2rem" onClick={() => setIsEdit(true)} />
+
+        <RiDeleteBinLine
+          size="1.2rem"
           onClick={() => {
             handleToDelete(el.id);
           }}
-        >
-          Delete
-        </Button>
+        />
       </Stack>
-    </Stack>
+    </>
   );
 };
 

@@ -7,9 +7,10 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import TodoItem from "../TodoItem/TodoItem";
-import ModalTodo from "../ModalTodo/ModalTodo";
+import ModalTodo from "../ModalCreateTodo/ModalCreateTodo";
 import "./todoForm.styles.css";
 import { TodoContext } from "../../TodoContext/TodoContext";
+import ModalCreateTodo from "../ModalCreateTodo/ModalCreateTodo";
 
 const TodoForm = () => {
   const {
@@ -21,10 +22,11 @@ const TodoForm = () => {
   } = useContext(TodoContext);
   return (
     <>
-      <ModalTodo>
+      <ModalCreateTodo>
         <Form
+          style={{ outline: "none !important" }}
           onSubmit={handleSubmit}
-          className="d-flex justify-content-center mt-4 gap-2 "
+          className="d-flex justify-content-center mt-4 gap-2"
         >
           <FormControl
             type="text"
@@ -34,10 +36,10 @@ const TodoForm = () => {
           />
 
           <Button size="sm" type="submit" onClick={handleCloseTodoModal}>
-            Added
+            Add
           </Button>
         </Form>
-      </ModalTodo>
+      </ModalCreateTodo>
 
       <ListGroup
         className="mt-4"
@@ -51,7 +53,7 @@ const TodoForm = () => {
             as="li"
             className="container d-flex "
             style={{
-              minWidth: "320px",
+              minWidth: "300px",
               height: "4rem",
             }}
           >
