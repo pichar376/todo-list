@@ -6,14 +6,17 @@ import { TodoContext } from "../../../TodoContext/TodoContext";
 import { useContext } from "react";
 
 const TodoApp = () => {
-  const { handleSearch, search } = useContext(TodoContext);
+  const { handleSearch, search, todos } = useContext(TodoContext);
+  const renderSearch = () => {
+    if (todos.length) {
+      return <SearchTodo onSearch={handleSearch} search={search} />;
+    }
+  };
   return (
     <Stack>
       <h1 style={{ textAlign: "center" }}>todoApp</h1>
-      <SearchTodo onSearch={handleSearch} search={search} />
-
+      {renderSearch()}
       <TodoForm />
-
       <ModalDelete />
     </Stack>
   );
